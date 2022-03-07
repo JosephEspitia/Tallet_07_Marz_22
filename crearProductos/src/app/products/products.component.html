@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <form #productForm="ngForm" (ngSubmit)="createProduct(productForm)">
+    <div class="row shadow-lg rounded mt-5 p-5">
+      <div class="col-md-3 shadow-lg p-3 gap-2 ">
+        <h2 class="text-center mb-4">Ingrea los Productos</h2>
+
+        <label for="name" class="form-label">Nombre del Producto </label>
+        <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Ingrese nombre"
+            required
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="productService.selectedProduct.name"
+          />
+
+        <label for="price" class="form-label">Precio</label>
+        <input
+            type="number"
+            class="form-control mb-3"
+            placeholder="Ingrese precio"
+            required
+            name="price"
+            #price="ngModel"
+            [(ngModel)]="productService.selectedProduct.price"
+          />
+
+        <label for="availableElemnts" class="form-label">
+          Elementos disponible</label>
+          <input
+          type="number"
+          class="form-control mb-3"
+          placeholder="Ingrese No. de elementos"
+          required
+          name="availableElemnts"
+          #availableElemnts="ngModel"
+          [(ngModel)]="productService.selectedProduct.availableElemnts"
+        />
+
+        <label for="description" class="form-label">
+          Descripción</label>
+          <input
+          type="text"
+          class="form-control mb-3"
+          placeholder="Ingrese descripción"
+          required
+          name="description"
+          #description="ngModel"
+          [(ngModel)]="productService.selectedProduct.description"
+        />
+        
+            <button class="btn btn-primary text-center btn-block">Crear Producto</button>
+        
+        
+      </div>
+
+      <div class=" col-md-8 ms-5">
+        <table class=" table table-striped table-responsive">
+          <thead>
+            <th class="text-center bg-primary"> ID</th>
+            <th class="text-center bg-primary">Nombre de producto</th>
+            <th class="text-center bg-primary">Precio Unidad</th>
+            <th class="text-center bg-primary">Elementos disponibles</th>
+            <th class="text-center bg-primary">Descripción</th>
+            <th class="bg-primary"></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productService.products">
+              <td>{{ product._id }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.availableElemnts }}</td>
+              <td>{{ product.description }}</td>
+              <td>
+                <a (click)="deleteProduct(product._id)" class="btn btn-danger">
+                  Borrar
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
